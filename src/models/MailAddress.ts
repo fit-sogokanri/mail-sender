@@ -2,11 +2,13 @@ import Mailer from "nodemailer/lib/mailer";
 
 export class MailAddress {
     private readonly address: string;
-    private readonly name: string;
+    private readonly name: string = "";
 
-    constructor(address: string, name: string) {
-        this.address = address;
-        this.name = name;
+    constructor(address: string);
+    constructor(address: string, name: string);
+    constructor(arg0: string, arg1?: string) {
+        this.address = arg0;
+        if(arg1) this.name = arg1;
     }
 
     public get_address(): string {
