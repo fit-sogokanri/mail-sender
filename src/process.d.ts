@@ -9,8 +9,8 @@ declare namespace NodeJS {
         readonly DB_PASSWORD: string;
         readonly DEBUG: string;
         readonly SMTP_HOST: string;
-        readonly SMTP_PORT: number;
-        readonly SMTP_SECURE: boolean;
+        readonly SMTP_PORT: string;
+        readonly SMTP_SECURE: string;
         readonly SMTP_USERNAME: string;
         readonly SMTP_PASSWORD: string;
     }
