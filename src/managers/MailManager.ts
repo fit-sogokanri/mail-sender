@@ -2,6 +2,8 @@ import { createTransport } from 'nodemailer';
 import { config } from "dotenv-safe";
 import Mailer from "nodemailer/lib/mailer";
 import {Mail} from "../models/Mail";
+import {SendMailError} from "../models/errors/SendMailError";
+import {MailResponse} from "../models/MailResponse";
 config();
 
 export class MailManager {
@@ -16,7 +18,12 @@ export class MailManager {
         },
     });
 
-    public static async send(mail: Mail): Promise<void> {
-        await this.transporter.sendMail(mail.get_message_object());
+    public static async send(mail: Mail): Promise<MailResponse> {
+        return new Promise<MailResponse>((resolve, reject) => {
+            this.transporter.sendMail(mail.get_message_object(), (err, info) => {
+                if(err) reject(new SendMailError(err.message));
+                resolve(MailResponse.parse(info));
+            });
+        })
     }
 }
