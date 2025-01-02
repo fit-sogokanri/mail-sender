@@ -109,7 +109,7 @@ export class TokenManager {
 
             try {
                 await execute(
-                    `INSERT INTO tokens(uuid, hash, name, description, expires) VALUES (?,?,?,?,?,?)`,
+                    `INSERT INTO tokens(uuid, hash, name, description, expires) VALUES (?,?,?,?,?)`,
                     [uuid, hash, name, description, expires]
                 )
                 const record = await get_first(`SELECT * FROM tokens WHERE uuid LIKE ?`, [uuid])
