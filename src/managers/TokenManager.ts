@@ -202,7 +202,7 @@ export class TokenManager {
     public static async authenticate(token_str: string): Promise<boolean> {
         const hash = get_hash_string(token_str);
         const list = await get_first(
-            "SELECT id, name FROM tokens WHERE hash LIKE ? AND (expires>=? OR expires=0)",
+            "SELECT uuid, name FROM tokens WHERE hash LIKE ? AND (expires>=? OR expires=0)",
             [hash, Date.now()]
         )
 
